@@ -15,4 +15,15 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Data\FileManager\" />
+    <Folder Include="wwwroot\content\Blog\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="wwwroot\content\static\blue.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
 </Project>

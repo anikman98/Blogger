@@ -1,4 +1,5 @@
 using Blogger.Data;
+using Blogger.Data.FileManager;
 using Blogger.Data.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -26,8 +27,9 @@ namespace Blogger
             services.AddDbContext<AppDbContext>(options => options.UseSqlServer(_config["DefaultConnection"]));
 
             services.AddTransient<IRepository, Repository>();
+            services.AddTransient<IFileManager, FileManager>();
 
-            services.AddDefaultIdentity<IdentityUser>(
+            services.AddIdentity<IdentityUser, IdentityRole>(
                     options =>
                     {
                         options.Password.RequireNonAlphanumeric = false;
@@ -36,8 +38,13 @@ namespace Blogger
                         options.Password.RequiredLength = 6;
                     }
                 )
-                .AddRoles<IdentityRole>()
+                //.AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<AppDbContext>();
+
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.LoginPath = "/Auth/Login";
+            });
 
             services.AddMvc(options => options.EnableEndpointRouting = false);
         }
@@ -49,6 +56,8 @@ namespace Blogger
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseStaticFiles();
 
             app.UseAuthentication();
 
