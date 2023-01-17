@@ -2,15 +2,11 @@ using Blog.Data;
 using Blogger.Data.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Blogger
 {
@@ -31,6 +27,10 @@ namespace Blogger
 
             services.AddTransient<IRepository, Repository>();
 
+            services.AddDefaultIdentity<IdentityUser>()
+                .AddRoles<IdentityRole>()
+                .AddEntityFrameworkStores<AppDbContext>();
+
             services.AddMvc(options => options.EnableEndpointRouting = false);
         }
 
@@ -42,16 +42,9 @@ namespace Blogger
                 app.UseDeveloperExceptionPage();
             }
 
-            //app.UseRouting();
             app.UseMvcWithDefaultRoute();
 
-            /*app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapGet("/", async context =>
-                {
-                    await context.Response.WriteAsync("Hello World!");
-                });
-            });*/
+            app.UseAuthentication();
         }
     }
 }
