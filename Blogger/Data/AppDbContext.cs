@@ -1,8 +1,8 @@
-using Blog.Models;
+using Blogger.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace Blog.Data
+namespace Blogger.Data
 {
     public class AppDbContext : IdentityDbContext
     {

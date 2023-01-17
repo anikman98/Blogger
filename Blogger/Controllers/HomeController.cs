@@ -1,10 +1,10 @@
-using Blog.Data;
-using Blog.Models;
+using Blogger.Data;
+using Blogger.Models;
 using Blogger.Data.Repository;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
-namespace Blog.Controllers
+namespace Blogger.Controllers
 {
     public class HomeController : Controller
     {

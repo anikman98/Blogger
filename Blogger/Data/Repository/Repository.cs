@@ -1,5 +1,5 @@
-﻿using Blog.Data;
-using Blog.Models;
+﻿using Blogger.Data;
+using Blogger.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;

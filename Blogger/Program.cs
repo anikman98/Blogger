@@ -1,4 +1,4 @@
-using Blog.Data;
+using Blogger.Data;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
@@ -18,22 +18,34 @@ namespace Blogger
         {
             var host = CreateHostBuilder(args).Build();
 
-            var scope = host.Services.CreateScope();
+            try
+            {   
+                var scope = host.Services.CreateScope();
 
-            var context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-            var userManager = scope.ServiceProvider.GetRequiredService<UserManager<IdentityUser>>();
-            var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+                var context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+                var userManager = scope.ServiceProvider.GetRequiredService<UserManager<IdentityUser>>();
+                var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
 
-            context.Database.EnsureCreated();
+                context.Database.EnsureCreated();
 
-            if(!context.Users.Any(u => u.UserName == "admin"))
+                var adminRole = new IdentityRole("Admin");
+                if(!context.Roles.Any())
+                {
+                    roleManager.CreateAsync(adminRole).GetAwaiter().GetResult();
+                }
+
+                if (!context.Users.Any(u => u.UserName == "admin"))
+                {
+                    var adminUser = new IdentityUser {
+                        UserName = "admin",
+                        Email = "admin@test.com"
+                    };
+                    userManager.CreateAsync(adminUser, "password").GetAwaiter().GetResult();
+                    userManager.AddToRoleAsync(adminUser, adminRole.Name).GetAwaiter().GetResult();
+                }
+            } catch (Exception ex)
             {
-                //create an admin
-            }
-
-            if (!context.Roles.Any())
-            {
-                //create a role
+                Console.WriteLine(ex.Message);
             }
                 
             host.Run();

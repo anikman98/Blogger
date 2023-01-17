@@ -1,6 +1,6 @@
 using System;
 
-namespace Blog.Models
+namespace Blogger.Models
 {
     public class Post
     {
