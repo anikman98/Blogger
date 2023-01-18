@@ -3,6 +3,7 @@ using Blogger.Models;
 using Blogger.Data.Repository;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
+using Blogger.Data.FileManager;
 
 namespace Blogger.Controllers
 {
@@ -10,10 +11,11 @@ namespace Blogger.Controllers
     {
 
         private IRepository _repo;
-
-        public HomeController(IRepository repo)
+        private IFileManager _fileManager;
+        public HomeController(IRepository repo, IFileManager fileManager)
         {
             _repo = repo;
+            _fileManager = fileManager;
         }
 
         public IActionResult Index()
@@ -26,6 +28,13 @@ namespace Blogger.Controllers
         {
             var post = _repo.GetPost(id);
             return View(post);
+        }
+
+        [HttpGet("/Image/{image}")]
+        public IActionResult Image(string image)
+        {
+            var mime = image.Substring(image.LastIndexOf('.') + 1);
+            return new FileStreamResult(_fileManager.ImageStream(image), $"image/{mime}");
         }
     }
 

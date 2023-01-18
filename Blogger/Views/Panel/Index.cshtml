@@ -4,13 +4,13 @@
 
 }
 
-<h1>Admin Panel</h1>
-
+<h1>Hi Admin!</h1>
+<p>Blogs</p>
 <div>
-    <ul>
+    <ul class="post-list">
         @foreach(var post in Model)
         {
-            <li>
+            <li class="posts-link">
                 <a asp-controller="Home" asp-action="Post" asp-route-id="@post.Id">
                     @post.Title
                 </a>

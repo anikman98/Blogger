@@ -12,12 +12,37 @@
         </div>
         <div>
             <label>Body</label>
-            <input asp-for="Body" />
+            <textarea id="editor" asp-for="Body"></textarea>
+        </div>
+        <div>
+            <label>Description</label>
+            <input asp-for="Description" />
+        </div>
+        <div>
+            <label>Tags</label>
+            <input asp-for="Tags" />
+        </div>
+        <div>
+            <label>Category</label>
+            <select asp-for="Category">
+                <option value="Travel">Travel</option>
+                <option value="Programming">Programming</option>
+                <option value="Photography">Photography</option>
+            </select>
         </div>
         <div>
             <label>Image</label>
+            <input asp-for="CurrentImage" type="hidden" />
             <input asp-for="Image" />
         </div>
         <input type="submit" value="submit" />
     </form>
 </div>
+
+@section scripts{
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type='text/javascript' src='https://cdn.jsdelivr.net/npm/froala-editor@latest/js/froala_editor.pkgd.min.js'></script>
+    <script>
+	    var editor = new FroalaEditor('textarea');		
+    </script>	
+}

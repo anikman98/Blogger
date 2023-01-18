@@ -18,6 +18,7 @@
   <ItemGroup>
     <Folder Include="Data\FileManager\" />
     <Folder Include="wwwroot\content\Blog\" />
+    <Folder Include="wwwroot\lib\" />
   </ItemGroup>
 
   <ItemGroup>

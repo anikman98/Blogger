@@ -1,0 +1,53 @@
+*{
+    margin: 0;
+    left: 0;
+}
+
+main{
+    margin: 20px 40px;
+    padding: 0 20px;
+}
+
+nav{
+    width: 100%;
+    /*height: 50px;*/
+    padding: 10px;
+    background-color: black;
+    color: white;
+}
+
+ul{
+    margin: auto;
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 20px;
+    list-style: none;
+}
+
+a{
+    text-decoration: none;
+    color: white;
+ }
+
+a:hover{
+    text-decoration: underline;
+}
+
+.post-list {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.posts-link > a {
+    text-decoration: none;
+    color: black;
+}
+
+.posts-link > a:hover{
+    text-decoration: underline;
+}

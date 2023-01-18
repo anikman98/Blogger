@@ -5,23 +5,40 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewBag.Title</title>
+    <meta name="description" content="@ViewBag.Description" />
+    <meta name="keywords" content="@ViewBag.Keywords" />
+    <link href="~/css/site.css" rel="stylesheet" />
+    <link href='https://cdn.jsdelivr.net/npm/froala-editor@latest/css/froala_editor.pkgd.min.css' rel='stylesheet' type='text/css' />
+
 </head>
 <body>
-    <div>
-        <a asp-controller="Home" asp-action="Index">Home</a>
-        <a asp-controller="Home" asp-action="Edit">Create post</a>
-        <a asp-controller="Panel" asp-action="Index">Admin Panel</a>
-
-
-        @if (User.Identity.IsAuthenticated)
-        {
-            <a asp-controller="Auth" asp-action="Logout">Sign out</a>
-        }else{
-            <a asp-controller="Auth" asp-action="Login">Sign in</a>
-        }
-    </div>
-    <div>       
+    <nav>
+        <ul>
+            <li>
+                <h3>Blogger</h3>
+            </li>
+            <li>
+                <a asp-controller="Home" asp-action="Index">Home</a>
+            </li>
+            <li>
+                <a asp-controller="Panel" asp-action="Edit">Create post</a>
+            </li>
+            <li>
+                <a asp-controller="Panel" asp-action="Index">Admin Panel</a>
+            </li>
+            <li>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <a asp-controller="Auth" asp-action="Logout">Sign out</a>
+                }else{
+                    <a asp-controller="Auth" asp-action="Login">Sign in</a>
+                }
+            </li>
+        </ul>
+    </nav>
+    <main>       
         @RenderBody()
-    </div>
+    </main>
+    @RenderSection("scripts", false)
 </body>
 </html>

@@ -2,10 +2,22 @@
 
 @{
 
+    ViewBag.Title = Model.Title;
+    ViewBag.Description = Model.Description;
+    ViewBag.Keywords = $"{Model.Tags?.Replace(",", " ")} {Model.Category}";
 }
 
 <div>
     <h3>@Model.Title</h3>
     <h5>@Model.Created</h5>
-    <p>@Model.Body</p>
+
+    @if (!String.IsNullOrEmpty(Model.Image))
+    {
+        var image_path = $"/Image/{Model.Image}";
+        <img src="@image_path" width="400"/>
+    }
+
+    <p>
+        @Html.Raw(Model.Body)
+    </p>
 </div>
