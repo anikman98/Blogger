@@ -64,7 +64,7 @@ namespace Blogger.Controllers
                 post.Image = vm.CurrentImage;
             else
                 post.Image = await _fileManager.SaveImage(vm.Image);
-
+                
 
             if (post.Id > 0)
                 _repo.UpdatePost(post);
